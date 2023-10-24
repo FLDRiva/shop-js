@@ -1,16 +1,21 @@
 let publicItem = []
 let archiveItem = []
 
-function addItem(text, num, img) {
+function addItem(text, num, img, arcItem) {
   id = +Math.random().toString().slice(2)
   newItem = {
     id: id,
     name: text,
     price: num,
     link: img,
-    arcItem: false
+    checkItem: false,
+    arcItem: arcItem
   }
-  publicItem.push(newItem)
+  if(newItem.arcItem === true) {
+    archiveItem.push(newItem)
+  } else {
+    publicItem.push(newItem)
+  }
 }
 
 function delItem(num) {
@@ -41,7 +46,7 @@ function addArchive(optionItem) {
 }
 
 
-addItem('mobile', 2000, 'https://www.google.com/')
+addItem('mobile', 2000, 'https://www.google.com/', true)
 console.log(publicItem);
-addArchive(true)
+// addArchive(true)
 console.log(archiveItem);
