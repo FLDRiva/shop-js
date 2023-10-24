@@ -1,5 +1,7 @@
 let publicItem = []
-let archiveItem = []
+let archiveItem = [
+  {id: 3, name: 'milk1', price: 50, link: '', checkItem: false, arcItem: true}
+]
 
 function addItem(text, num, img, arcItem) {
   id = +Math.random().toString().slice(2)
@@ -36,17 +38,21 @@ function refreshItem(num, text, price, img,) {
   }
 }
 
-function addArchive(optionItem) {
+function addArchive(num, optionItem) {
   for (i = 0; i < publicItem.length; i++) {
-    if (publicItem[i].arcItem === optionItem) {
+    if (publicItem[i].arcItem === optionItem && publicItem[i].id === num) {
       archiveItem.push(publicItem[i])
-    }
+      delete publicItem[i]
+    } 
   }
-  
+  for (j = 0; j < archiveItem.length; j++) {
+    if (archiveItem[j].arcItem !== optionItem && archiveItem[j].id === num) {
+      publicItem.push(archiveItem[j])
+      delete archiveItem[j]
+    }
+  }  
 }
 
-
-addItem('mobile', 2000, 'https://www.google.com/', true)
+addArchive(3, false)
 console.log(publicItem);
-// addArchive(true)
 console.log(archiveItem);
