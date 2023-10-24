@@ -1,6 +1,8 @@
-let publicItem = []
+let publicItem = [
+  {id: 1, name: 'tttt', price: 2, link: '', arcItem: false}
+]
 let archiveItem = [
-  {id: 3, name: 'milk1', price: 50, link: '', checkItem: false, arcItem: true}
+  {id: 2, name: 'rrrr', price: 2, link: '', arcItem: true}
 ]
 
 function addItem(text, num, img, arcItem) {
@@ -10,7 +12,6 @@ function addItem(text, num, img, arcItem) {
     name: text,
     price: num,
     link: img,
-    checkItem: false,
     arcItem: arcItem
   }
   if(newItem.arcItem === true) {
@@ -28,9 +29,9 @@ function delItem(num) {
   }
 }
 
-function refreshItem(num, text, price, img,) {
+function refreshItem(currentId, text, price, img,) {
   for (i = 0; i < publicItem.length; i++) {
-    if (publicItem[i].id === num ) {
+    if (publicItem[i].id === currentId ) {
       publicItem[i].name = text
       publicItem[i].price = price
       publicItem[i].link = img
@@ -38,21 +39,23 @@ function refreshItem(num, text, price, img,) {
   }
 }
 
-function addArchive(num, optionItem) {
+function addArchive(currentId) {
   for (i = 0; i < publicItem.length; i++) {
-    if (publicItem[i].arcItem === optionItem && publicItem[i].id === num) {
+    if (publicItem[i].id === currentId) {
+      publicItem[i].arcItem = !publicItem[i].arcItem
       archiveItem.push(publicItem[i])
-      delete publicItem[i]
+      publicItem.splice(i, 1)
     } 
   }
   for (j = 0; j < archiveItem.length; j++) {
-    if (archiveItem[j].arcItem !== optionItem && archiveItem[j].id === num) {
+    if (archiveItem[j].id === currentId) {
+      archiveItem[j].arcItem = !archiveItem[j].arcItem
       publicItem.push(archiveItem[j])
-      delete archiveItem[j]
+      archiveItem.splice(j, 1)
     }
   }  
 }
 
-addArchive(3, false)
-console.log(publicItem);
+
+addArchive(2, true)
 console.log(archiveItem);
