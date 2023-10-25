@@ -1,9 +1,10 @@
-let publicItem = [
-  {id: 1, name: 'tttt', price: 2, link: '', arcItem: false}
-]
-let archiveItem = [
-  {id: 2, name: 'rrrr', price: 2, link: '', arcItem: true}
-]
+let shopItem = {
+
+  publicItem: [],
+  archiveItem: []
+
+}
+
 
 function addItem(text, num, img, arcItem) {
   id = +Math.random().toString().slice(2)
@@ -15,47 +16,64 @@ function addItem(text, num, img, arcItem) {
     arcItem: arcItem
   }
   if(newItem.arcItem === true) {
-    archiveItem.push(newItem)
+    shopItem.publicItem.push(newItem)
   } else {
-    publicItem.push(newItem)
+    shopItem.publicItem.push(newItem)
   }
 }
 
-function delItem(num) {
-  for (i = 0; i < publicItem.length; i++) {
-    if(publicItem[i].id === num) {
-      delete publicItem[id]
+function delItem(currentId) {
+  for (i = 0; i < shopItem.publicItem.length; i++) {
+    if(shopItem.publicItem[i].id === currentId) {
+      console.log(shopItem.publicItem[i]);
+      delete shopItem.publicItem[i]
     }
   }
 }
 
 function refreshItem(currentId, text, price, img,) {
-  for (i = 0; i < publicItem.length; i++) {
-    if (publicItem[i].id === currentId ) {
-      publicItem[i].name = text
-      publicItem[i].price = price
-      publicItem[i].link = img
+  for (i = 0; i < shopItem.publicItem.length; i++) {
+    if (shopItem.publicItem[i].id === currentId ) {
+      shopItem.publicItem[i].name = text
+      shopItem.publicItem[i].price = price
+      shopItem.publicItem[i].link = img
     }
   }
 }
 
 function addArchive(currentId) {
-  for (i = 0; i < publicItem.length; i++) {
-    if (publicItem[i].id === currentId) {
-      publicItem[i].arcItem = !publicItem[i].arcItem
-      archiveItem.push(publicItem[i])
-      publicItem.splice(i, 1)
+  for (i = 0; i < shopItem.publicItem.length; i++) {
+    if (shopItem.publicItem[i].id === currentId) {
+      shopItem.publicItem[i].arcItem = !shopItem.publicItem[i].arcItem
+      shopItem.archiveItem.push(shopItem.publicItem[i])
+      shopItem.publicItem.slice(i, 1)
     } 
   }
-  for (j = 0; j < archiveItem.length; j++) {
-    if (archiveItem[j].id === currentId) {
-      archiveItem[j].arcItem = !archiveItem[j].arcItem
-      publicItem.push(archiveItem[j])
-      archiveItem.splice(j, 1)
+  for (j = 0; j < shopItem.archiveItem.length; j++) {
+    if (shopItem.archiveItem[j].id === currentId) {
+      shopItem.archiveItem[j].arcItem = !shopItem.archiveItem[j].arcItem
+      shopItem.publicItem.push(shopItem.archiveItem[j])
+      shopItem.archiveItem.splice(j, 1)
     }
   }  
 }
 
+const order = [
 
-addArchive(2, true)
-console.log(archiveItem);
+  newOrder = {
+    userId: '',
+    userName: '',
+    userEmail: '',
+    userPhone: +79225654,
+    userAdress: '',
+    userComment: '',
+  },
+
+  itemOrder = {
+    id: 2,
+    title: '',
+    price: 223,
+    quantity: 2
+  }
+]
+
