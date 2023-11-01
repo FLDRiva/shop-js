@@ -1,6 +1,9 @@
 let shopItem = {
 
-  publicItem: [],
+  publicItem: [
+    {id: 3, name: 'phone', price: 700, link: '', arcItem: false},
+    {id: 2, name: 'milk', price: 900, link: '', arcItem: false}
+  ],
   archiveItem: []
 
 }
@@ -16,7 +19,7 @@ function addItem(text, num, img, arcItem) {
     arcItem: arcItem
   }
   if(newItem.arcItem === true) {
-    shopItem.publicItem.push(newItem)
+    shopItem.archiveItem.push(newItem)
   } else {
     shopItem.publicItem.push(newItem)
   }
@@ -46,7 +49,7 @@ function addArchive(currentId) {
     if (shopItem.publicItem[i].id === currentId) {
       shopItem.publicItem[i].arcItem = !shopItem.publicItem[i].arcItem
       shopItem.archiveItem.push(shopItem.publicItem[i])
-      shopItem.publicItem.slice(i, 1)
+      shopItem.publicItem.splice(i, 1)
     } 
   }
   for (j = 0; j < shopItem.archiveItem.length; j++) {
@@ -57,23 +60,4 @@ function addArchive(currentId) {
     }
   }  
 }
-
-const order = [
-
-  newOrder = {
-    userId: '',
-    userName: '',
-    userEmail: '',
-    userPhone: +79225654,
-    userAdress: '',
-    userComment: '',
-  },
-
-  itemOrder = {
-    id: 2,
-    title: '',
-    price: 223,
-    quantity: 2
-  }
-]
 
